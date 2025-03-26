@@ -91,6 +91,13 @@ class Ticket(models.Model):
                 name="unique_row_seat_movie_session_constraint")
         ]
 
+    def __str__(self) -> str:
+        return (
+            f"{self.movie_session.movie.title} "
+            f"{self.movie_session.show_time} "
+            f"(row: {self.row}, seat: {self.seat})"
+        )
+
     def save(self, *args, **kwargs) -> None:
         self.full_clean()
         return super().save(*args, **kwargs)
